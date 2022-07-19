@@ -8,7 +8,7 @@ import Form from './components/Form/Form.js'
 import useStyles from './styles.js'
 
 const App = () => {
-  const [currentId, setCurrentId] = useState(null)
+  const [currentId, setCurrentId] = useState(0)
   const classes = useStyles()
   const dispatch = useDispatch()
 
