@@ -15,7 +15,7 @@ const Form = ({ currentId, setCurrentId }) => {
     selectedFile: '',
   })
   const post = useSelector((state) =>
-    currentId ? state.posts.find((p) => postData._id == currentId) : null
+    currentId ? state.posts.find((p) => postData._id === currentId) : null
   )
   const classes = useStyles()
   const dispatch = useDispatch()
@@ -23,17 +23,6 @@ const Form = ({ currentId, setCurrentId }) => {
   useEffect(() => {
     if (post) setPostData(post)
   }, [post])
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    if (currentId) {
-      dispatch.updatePost(createPost(currentId, postData))
-    } else {
-      dispatch(createPost(postData))
-    }
-    clear()
-  }
 
   const clear = () => {
     setCurrentId(null)
@@ -46,16 +35,27 @@ const Form = ({ currentId, setCurrentId }) => {
     })
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if (currentId) {
+      dispatch.updatePost(createPost(currentId, postData))
+    } else {
+      dispatch(createPost(postData))
+    }
+    clear()
+  }
+
   return (
-    <Paper className={`${classes.root} ${classes.form}`}>
+    <Paper className={classes.paper}>
       <form
         autoComplete="off"
         noValidate
-        className={classes.form}
+        className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">
-          ${currentId ? 'Editing' : 'Creating'} a Memory
+          {currentId ? 'Editing' : 'Creating'} a Memory
         </Typography>
         <TextField
           name="creator"
@@ -104,7 +104,7 @@ const Form = ({ currentId, setCurrentId }) => {
         </div>
         <Button
           className={classes.buttonSubmit}
-          variant="container"
+          variant="contained"
           color="primary"
           size="large"
           type="submit"

@@ -5,15 +5,18 @@ import {
   CardContent,
   CardMedia,
   Button,
-  Typhography,
-} from '@material-ui/core'
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAl'
+  Typography,
+} from '@material-ui/core/'
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt'
 import DeleteIcon from '@material-ui/icons/Delete'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
-import useStyles from './styles'
 import moment from 'moment'
+import { useDispatch } from 'react-redux'
+import useStyles from './styles'
 
 const Post = ({ post, setCurrentId }) => {
+  const dispatch = useDispatch()
+  const classes = useStyles()
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -22,10 +25,10 @@ const Post = ({ post, setCurrentId }) => {
         title={postMessage.title}
       />
       <div className={classes.overlay}>
-        <Typhography variant="h6">{post.creator}</Typhography>
-        <Typhography variant="body2">
-          {moment(post.creatorAt).fromNow()}
-        </Typhography>
+        <Typography variant="h6">{post.creator}</Typography>
+        <Typography variant="body2">
+          {moment(post.createdAt).fromNow()}
+        </Typography>
       </div>
       <div className={classes.overlay2}>
         <Button
@@ -33,21 +36,21 @@ const Post = ({ post, setCurrentId }) => {
           size="small"
           onClick={() => setCurrentId(post._id)}
         >
-          <MoreHorizIcon fontSize="default" />
+          <MoreHorizIcon fontSize="medium" />
         </Button>
       </div>
       <div className={classes.details}>
-        <Typhography variant="body2" color="textSecondary">
+        <Typography variant="body2" color="textSecondary">
           {post.tags.map((tag) => `#${tag} `)}
-        </Typhography>
+        </Typography>
       </div>
-      <Typhography className={classes.title} variant="h5" gutterBottom>
+      <Typography className={classes.title} variant="h5" gutterBottom>
         {post.message}
-      </Typhography>
+      </Typography>
       <CardContent>
-        <Typhography classNme={classes.title} variant="h5" gutterBottom>
+        <Typography classNme={classes.title} variant="h5" gutterBottom>
           {post.message}
-        </Typhography>
+        </Typography>
       </CardContent>
       <CardActions className={classes.CardActions}>
         <Button size="small" color="primary" onClick={() => {}}>
