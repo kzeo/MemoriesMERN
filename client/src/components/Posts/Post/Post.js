@@ -13,7 +13,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import useStyles from './styles'
 import moment from 'moment'
 
-const Post = ({ post }) => {
+const Post = ({ post, setCurrentId }) => {
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -28,7 +28,11 @@ const Post = ({ post }) => {
         </Typhography>
       </div>
       <div className={classes.overlay2}>
-        <Button stle={{ color: 'white}' }} size="small" onClick={() => {}}>
+        <Button
+          style={{ color: 'white}' }}
+          size="small"
+          onClick={() => setCurrentId(post._id)}
+        >
           <MoreHorizIcon fontSize="default" />
         </Button>
       </div>

@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import useStyles from './styles.js'
 import { TextField, Button, Typography, Paper } from '@material-ui/core'
 import FileBase from 'react-file-base64'
+import { createPost, updatePost } from '../../actions/posts.js'
+import { useDispatch } from 'react-redux'
+//GET THE CURRENT ID
 
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
     creator: '',
     title: '',
@@ -13,7 +16,17 @@ const Form = () => {
   })
   const classes = useStyles()
 
-  const handleSubmit = () => {}
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if (currentId) {
+      dispatch.updatePost(createPost(currentId, postData))
+    } else {
+      dispatch(createPost(postData))
+    }
+
+    dispatch(createPost(postData))
+  }
 
   const clear = () => {}
 
