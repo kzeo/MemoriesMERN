@@ -15,7 +15,7 @@ const Form = ({ currentId, setCurrentId }) => {
     selectedFile: '',
   })
   const post = useSelector((state) =>
-    currentId ? state.posts.find((p) => postData._id === currentId) : null
+    currentId ? state.posts.find((message) => message._id === currentId) : null
   )
   const classes = useStyles()
   const dispatch = useDispatch()
@@ -25,7 +25,7 @@ const Form = ({ currentId, setCurrentId }) => {
   }, [post])
 
   const clear = () => {
-    setCurrentId(null)
+    setCurrentId(0)
     setPostData({
       creator: '',
       title: '',
@@ -56,7 +56,7 @@ const Form = ({ currentId, setCurrentId }) => {
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">
-          {currentId ? 'Editing' : 'Creating'} a Memory
+          {currentId ? `Editing "${post.title}"` : 'Creating a Memory'}
         </Typography>
         <TextField
           name="creator"
