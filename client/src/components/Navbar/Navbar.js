@@ -18,7 +18,7 @@ const Navbar = () => {
   const logout = () => {
     dispatch({ type: actionType.LOGOUT })
 
-    navigate('/', { replace: true })
+    navigate('/auth', { replace: true })
     setUser(null)
   }
 
