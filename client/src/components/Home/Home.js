@@ -13,7 +13,7 @@ import ChipInput from 'material-ui-chip-input'
 import Posts from '../Posts/Posts.js'
 import Form from '../Form/Form.js'
 import { useDispatch } from 'react-redux'
-import { getPosts } from '../../actions/posts'
+import { getPosts, getPostBySearch } from '../../actions/posts'
 import Pagination from '../Pagination.jsx'
 import useStyles from './styles.js'
 
@@ -48,7 +48,11 @@ const Home = () => {
     setTags(tags.filter((tag) => tag !== tagToDelete))
 
   const searchPost = () => {
-    if (search.trim()) {
+    if (search.trim() || tags) {
+      dispatch(getPostBySearch({ search, tags: tags.join(',') }))
+      navigate(
+        `/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`
+      )
       //dispatch -> fetch search Post
     } else {
       navigate('/')
@@ -102,7 +106,7 @@ const Home = () => {
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6}>
-              <Pagination />
+              <Pagination page={page} />
             </Paper>
           </Grid>
         </Grid>
