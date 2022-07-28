@@ -5,6 +5,7 @@ import {
   CardContent,
   CardMedia,
   Button,
+  ButtonBase,
   Typography,
 } from '@material-ui/core/'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt'
@@ -16,11 +17,13 @@ import { useDispatch } from 'react-redux'
 
 import { likePost, deletePost } from '../../../actions/posts'
 import useStyles from './styles'
+import { useNavigate } from 'react-router-dom'
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch()
   const classes = useStyles()
   const user = JSON.parse(localStorage.getItem('profile'))
+  const navigate = useNavigate()
 
   const Likes = () => {
     if (post.likes.length > 0) {
@@ -50,8 +53,16 @@ const Post = ({ post, setCurrentId }) => {
     )
   }
 
+  const openPost = () => {
+    navigate(`/posts/${post._id}`)
+  }
+
   return (
     <Card className={classes.card} raised elevation={6}>
+      <ButtonBase
+        className={classes.cardAction}
+        onClick={openPost}
+      ></ButtonBase>
       <CardMedia
         className={classes.media}
         image={
@@ -69,6 +80,11 @@ const Post = ({ post, setCurrentId }) => {
       {(user?.result?.googleId === post?.creator ||
         user?.result?._id === post?.creator) && (
         <div className={classes.overlay2}>
+          <ButtonBase
+            className={classes.cardAction}
+            onClick={openPost}
+          ></ButtonBase>
+
           <Button
             onClick={() => setCurrentId(post._id)}
             style={{ color: 'white' }}
