@@ -2,6 +2,7 @@ import express from 'express'
 import {
   getPostsBySearch,
   getPosts,
+  getPost,
   createPost,
   updatePost,
   deletePost,

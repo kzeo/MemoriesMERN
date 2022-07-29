@@ -29,6 +29,11 @@ export default (state = { isLoading: true, posts: [] }, action) => {
         ...state,
         posts: action.payload,
       }
+    case 'FETCH_POST':
+      return {
+        ...state,
+        post: action.payload,
+      }
     case 'CREATE':
       return { ...state, posts: [...state, action.payload] }
     default:

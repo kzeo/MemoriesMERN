@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
-import { useParams, useHistory } from 'react-router-dom'
-import useStyles from './styles'
-import { getPost } from '../../actions/posts.js'
+import { useParams, useNavigate } from 'react-router-dom'
+import useStyles from './styles.js'
+import { getPost, getPostBySearch } from '../../actions/posts.js'
 
-const PostDetails = () => {
+const Post = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -15,7 +15,29 @@ const PostDetails = () => {
 
   useEffect(() => {
     dispatch(getPost(id))
+    // eslint-disable-next-line
   }, [id])
+
+  useEffect(() => {
+    if (post) {
+      dispatch(getPostBySearch({ search: 'none', tags: post?.tags.join(',') }))
+    }
+    // eslint-disable-next-line
+  }, [post])
+
+  if (!post) return null
+
+  const openPost = (_id) => navigate(`/posts/${_id}`)
+
+  if (isLoading) {
+    return (
+      <Paper elevation={6} className={classes.loadingPaper}>
+        <CircularProgress size="7em" />
+      </Paper>
+    )
+  }
+
+  const recommendedPosts = posts.filter(({ _id }) => _id !== post._id)
 
   return (
     <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
@@ -86,7 +108,7 @@ const PostDetails = () => {
                   <Typography gutterBottom variant="subtitle1">
                     Likes: {likes.length}
                   </Typography>
-                  <img src={selectedFile} width="200px" />
+                  <img src={selectedFile} alt={post.title} width="200px" />
                 </div>
               )
             )}
@@ -97,4 +119,4 @@ const PostDetails = () => {
   )
 }
 
-export default PostDetails
+export default Post

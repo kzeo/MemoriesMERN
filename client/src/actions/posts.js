@@ -19,7 +19,7 @@ export const getPost = (id) => async (dispatch) => {
     dispatch({ type: FETCH_POST, payload: data })
     dispatch({ type: END_LOADING })
   } catch (error) {
-    console.log(error.message)
+    console.log(error)
   }
 }
 
@@ -49,10 +49,12 @@ export const getPostBySearch = (searchQuery) => async (dispatch) => {
   }
 }
 
-export const createPost = (post) => async (dispatch) => {
+export const createPost = (post, navigate) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING })
     const { data } = await api.createPost(post)
+
+    navigate(`/posts/${data._id}`)
 
     dispatch({ type: CREATE, payload: data })
     dispatch({ type: END_LOADING })
