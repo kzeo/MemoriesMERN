@@ -5,6 +5,7 @@ import moment from 'moment'
 import { useParams, useNavigate } from 'react-router-dom'
 import useStyles from './styles.js'
 import { getPost, getPostBySearch } from '../../actions/posts.js'
+import CommentSection from './CommentSection.jsx'
 
 const Post = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts)
@@ -66,19 +67,17 @@ const Post = () => {
             <strong>Realtime Chat - coming soon!</strong>
           </Typography>
           <Divider style={{ margin: '20px 0' }} />
-          <Typography variant="body1">
-            <strong>Comments - coming soon!</strong>
-          </Typography>
+          <CommentSection post={post} />
           <Divider style={{ margin: '20px 0' }} />
         </div>
         <div className={classes.imageSection}>
           <img
             className={classes.media}
+            alt={post.title}
             src={
               post.selectedFile ||
               'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'
             }
-            alt={post.title}
           />
         </div>
       </div>
@@ -108,7 +107,7 @@ const Post = () => {
                   <Typography gutterBottom variant="subtitle1">
                     Likes: {likes.length}
                   </Typography>
-                  <img src={selectedFile} alt={post.title} width="200px" />
+                  <img alt="Your memory" src={selectedFile} width="200px" />
                 </div>
               )
             )}
