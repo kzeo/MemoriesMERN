@@ -13,7 +13,7 @@ const CommentSection = ({ post }) => {
   const dispatch = useDispatch()
   const commentsRef = useRef()
 
-  const handleClick = async () => {
+  const handleComment = async () => {
     const finalComment = `${user.result.name}: ${comment}`
 
     const newComments = await dispatch(commentPost(finalComment, post._id))
@@ -26,8 +26,8 @@ const CommentSection = ({ post }) => {
 
   return (
     <div>
-      <div className={classes.commentOuterContainer}>
-        <div className={classes.commentInnerContainer}>
+      <div className={classes.commentsOuterContainer}>
+        <div className={classes.commentsInnerContainer}>
           <Typography gutterBottom variant="h6">
             Comments
           </Typography>
@@ -40,7 +40,7 @@ const CommentSection = ({ post }) => {
           <div ref={commentsRef} />
         </div>
         {user?.result?.name && (
-          <div style={{ width: '70' }}>
+          <div style={{ width: '70%' }}>
             <Typography gutterBottom variant="h6">
               Write a comment
             </Typography>
@@ -51,7 +51,7 @@ const CommentSection = ({ post }) => {
               label="Comment"
               multiline
               value={comment}
-              onClick={(e) => setComment(e.target.value)}
+              onChange={(e) => setComment(e.target.value)}
             />
             <br />
             <Button
@@ -60,7 +60,7 @@ const CommentSection = ({ post }) => {
               disabled={!comment}
               variant="contained"
               color="primary"
-              onClick={handleClick}
+              onClick={handleComment}
             >
               Comment
             </Button>

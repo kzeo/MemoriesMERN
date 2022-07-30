@@ -2,10 +2,10 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles((theme) => ({
   media: {
-    borderRadius: '20px',
+    width: '1080px',
+    maxHeight: '720px',
     objectFit: 'cover',
-    width: '100%',
-    maxHeight: '600px',
+    borderRadius: '20px',
   },
   card: {
     display: 'flex',
@@ -47,6 +47,7 @@ export default makeStyles((theme) => ({
   },
   commentsInnerContainer: {
     height: '200px',
+    width: '400px',
     overflowY: 'auto',
     marginRight: '30px',
   },

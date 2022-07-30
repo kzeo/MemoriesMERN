@@ -105,7 +105,7 @@ const Post = () => {
                     {message}
                   </Typography>
                   <Typography gutterBottom variant="subtitle1">
-                    Likes: {likes.length}
+                    Likes: {likes.length - 1}
                   </Typography>
                   <img alt="Your memory" src={selectedFile} width="200px" />
                 </div>

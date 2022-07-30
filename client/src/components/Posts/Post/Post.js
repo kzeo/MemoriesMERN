@@ -39,19 +39,19 @@ const Post = ({ post, setCurrentId }) => {
   }
 
   const Likes = () => {
-    if (likes.length > 0) {
+    if (likes.length > 1) {
       return likes.find((like) => like === userId) ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
           &nbsp;
-          {likes.length > 2
-            ? `You and ${likes.length - 1} others`
-            : `${likes.length} like${likes.length > 1 ? 's' : ''}`}
+          {likes.length > 3
+            ? `You and ${likes.length - 2} others`
+            : `${likes.length - 1} like${likes.length > 2 ? 's' : ''}`}
         </>
       ) : (
         <>
           <ThumbUpAltOutlined fontSize="small" />
-          &nbsp;{likes.length} {likes.length === 1 ? 'Like' : 'Likes'}
+          &nbsp;{likes.length - 1} {likes.length === 2 ? 'Like' : 'Likes'}
         </>
       )
     }
@@ -99,7 +99,10 @@ const Post = ({ post, setCurrentId }) => {
             ></ButtonBase>
 
             <Button
-              onClick={() => setCurrentId(post._id)}
+              onClick={(e) => {
+                e.stopPropagation()
+                setCurrentId(post._id)
+              }}
               style={{ color: 'white' }}
               size="small"
             >
